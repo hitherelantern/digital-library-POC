@@ -36,7 +36,7 @@ class Retriever:
             metadata_list = [{'page': doc.metadata['page'], 'pdf': doc.metadata['pdf']} for doc in result]
             page_content_list = [doc.page_content for doc in result]
             print(f"Successfully retrieved {k} documents")
-            print(f"Time taken to retrieve {k} documents is {end-start} seconds")
+            print(f"Time taken to retrieve {k} documents is {end - start:.4f} seconds")
             return page_content_list,metadata_list
         
         except Exception as e:

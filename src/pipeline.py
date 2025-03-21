@@ -17,10 +17,10 @@ def pipeline(pdf_path):
     pdf_text = preprocessor.clean_text()
     page_chunks = preprocessor.text_splitting(chunk_size=1000,chunk_overlap=200)
   
-    chunk_data = []
-    for page, chunks in page_chunks.items():
-        for chunk in chunks:
-            chunk_data.append({"page": page, "chunk": chunk})
+    # chunk_data = []
+    # for page, chunks in page_chunks.items():
+    #     for chunk in chunks:
+    #         chunk_data.append({"page": page, "chunk": chunk})
 
     # Embedding model to be used.
     embedding_model_instance = HuggingFaceEmbeddings(model_name="sentence-transformers/all-MiniLM-L6-v2")

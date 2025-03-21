@@ -3,7 +3,7 @@ from components.reader import Reader
 from components.preprocessor import Preprocessor
 from components.collector import InfoCollector
 from components.writer import Writer
-import pandas as pd
+import pandas as pd,os
 
 def pipeline(pdf_path):
     # Step 1: Read the PDF
@@ -53,4 +53,6 @@ def pipeline(pdf_path):
 
 # Execute the pipeline
 if __name__ == "__main__":
-    pipeline(r"D:\digital library\Business,finance and economics\Rich Dad Poor Dad.pdf")
+    path = os.path.join(r"..\Business,finance and economics\the-art-of-seo-by-eric-and-jessie.pdf")
+    pipeline(path)
+

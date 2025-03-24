@@ -1,3 +1,4 @@
+import time
 from langchain_huggingface import HuggingFaceEmbeddings
 from components.reader import Reader
 from components.preprocessor import Preprocessor
@@ -6,9 +7,13 @@ from components.writer import Writer
 import pandas as pd,os
 
 def pipeline(pdf_path):
+    start = time.time()
     # Step 1: Read the PDF
     print("Reading the PDF...")
     reader = Reader(pdf_path)
+    if reader.isthere():
+        print(f"{os.path.basename(pdf_path)} is already in the Database")
+        return 
     pdf_text = reader.extract_text()
 
     # Step 2: Preprocess the text
@@ -48,11 +53,21 @@ def pipeline(pdf_path):
     )
     
     writer.save_to_vector_db(metadata)
+    end = time.time()
 
     print("Pipeline completed successfully!")
+    print(f"pipeline completed within {end - start:.4f} seconds")
 
 # Execute the pipeline
 if __name__ == "__main__":
-    path = os.path.join(r"..\Business,finance and economics\the-art-of-seo-by-eric-and-jessie.pdf")
-    pipeline(path)
+    path = os.path.join(r"..\Business,finance and economics")
+    files = os.listdir(path)
+    
+    for file in range(len(files)):
+        print(os.path.basename(files[file]))
+        # print(os.path.join(path, files[file]))
+        pipeline(os.path.join(path, files[file]))
+        
+
+    
 

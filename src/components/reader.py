@@ -1,9 +1,34 @@
+import os
 import fitz
+from pymilvus import Collection, connections
 
 class Reader:
 
     def __init__(self,pdf_document):
         self.pdf_document = pdf_document
+
+
+    def isthere(self):
+        # Step 1: Connect to Milvus
+        connections.connect("default", host="localhost", port="19530")
+
+        # Step 2: Access the Collection
+        collection_name = "pdf_embeddings"  # Replace with your Milvus collection name
+        collection = Collection(collection_name)
+
+        # Step 3: Query for Metadata
+        # Retrieve all metadata for the "pdf" field
+
+        expr = "1 < page < 8"
+        results = collection.query(
+            expr=expr,  # No filtering condition, fetch all documents
+            output_fields=["pdf"] , # Specify the "pdf" field
+        )
+
+        # Step 4: Extract Unique PDF Values
+        pdf_values = {result["pdf"] for result in results if "pdf" in result}
+        return os.path.basename(self.pdf_document) in pdf_values
+
 
     def extract_text(self):
         """
@@ -16,6 +41,9 @@ class Reader:
         Returns:
         - pdf_text (dict): Dictionary with page numbers as keys and text content as values.
         """
+        #.......
+        "Note...some problem with the page extraction and formating here!"
+
         # Open the PDF file
         document = fitz.open(self.pdf_document)
 

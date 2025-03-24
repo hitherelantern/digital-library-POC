@@ -46,20 +46,20 @@ class Retriever:
 
 
         
-if __name__ == "__main__":
+# if __name__ == "__main__":
 
 
-    collection = 'pdf_embeddings'
-    search_params = {
-        "metric_type": "COSINE",  # Use the same metric as during insertion
-        "params": {"nprobe": 10}  # IVF search parameter
-    }
-    embedding_model = HuggingFaceEmbeddings(model_name="sentence-transformers/all-MiniLM-L6-v2")
+#     collection = 'pdf_embeddings'
+#     search_params = {
+#         "metric_type": "COSINE",  # Use the same metric as during insertion
+#         "params": {"nprobe": 10}  # IVF search parameter
+#     }
+#     embedding_model = HuggingFaceEmbeddings(model_name="sentence-transformers/all-MiniLM-L6-v2")
 
-    r = Retriever(collection,embedding_model,search_params)
+#     r = Retriever(collection,embedding_model,search_params)
 
 
-    query = "What is the middle class mindset?"
-    content,metadata = r.search(query,1)
-    print(f"content:{content}")
-    print(f"metadata:{metadata}")
+#     query = input("Have a query!.....\n")
+#     content,metadata = r.search(query,1)
+#     print(f"content:{content}")
+#     print(f"metadata:{metadata}")

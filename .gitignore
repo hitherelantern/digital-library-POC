@@ -1,4 +1,5 @@
 chunks.xlsx
 Business,finance and economics
 # test.py
-src/components/__pycache__/
+__pycache__
+.env

@@ -1,6 +1,6 @@
 import os
 import fitz
-from pymilvus import Collection, connections
+from pymilvus import Collection, connections,utility
 
 class Reader:
 
@@ -12,20 +12,27 @@ class Reader:
         # Step 1: Connect to Milvus
         connections.connect("default", host="localhost", port="19530")
 
-        # Step 2: Access the Collection
+        # Step 2: Check if Collection Exists
         collection_name = "pdf_embeddings"  # Replace with your Milvus collection name
+        if collection_name not in utility.list_collections():
+            print(f"Collection '{collection_name}' does not exist.")
+            return False  # Collection does not exist
+
+        # Step 3: Access the Collection
         collection = Collection(collection_name)
 
-        # Step 3: Query for Metadata
-        # Retrieve all metadata for the "pdf" field
+        # Step 4: Query for Metadata
+        expr = "1 < page < 8"  # Modify this condition as needed
+        try:
+            results = collection.query(
+                expr=expr,  # Query condition
+                output_fields=["pdf"],  # Specify the "pdf" field
+            )
+        except Exception as e:
+            print(f"Error querying collection: {e}")
+            return False
 
-        expr = "1 < page < 8"
-        results = collection.query(
-            expr=expr,  # No filtering condition, fetch all documents
-            output_fields=["pdf"] , # Specify the "pdf" field
-        )
-
-        # Step 4: Extract Unique PDF Values
+        # Step 5: Extract Unique PDF Values
         pdf_values = {result["pdf"] for result in results if "pdf" in result}
         return os.path.basename(self.pdf_document) in pdf_values
 

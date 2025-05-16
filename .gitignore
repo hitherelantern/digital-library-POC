@@ -3,3 +3,4 @@ Business,finance and economics
 # test.py
 __pycache__
 .env
+data/

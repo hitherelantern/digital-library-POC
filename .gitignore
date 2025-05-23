@@ -1,6 +1,9 @@
 chunks.xlsx
 Business,finance and economics
 # test.py
+# app.py
 __pycache__
 .env
 src/data/
+faiss_index/
+trials/

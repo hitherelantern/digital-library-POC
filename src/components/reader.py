@@ -13,7 +13,7 @@ class Reader:
         connections.connect("default", host="localhost", port="19530")
 
         # Step 2: Check if Collection Exists
-        collection_name = "pdf_embeddings"  # Replace with your Milvus collection name
+        collection_name = "pdf_embeddings1" 
         if collection_name not in utility.list_collections():
             print(f"Collection '{collection_name}' does not exist.")
             return False  # Collection does not exist

@@ -1,6 +1,10 @@
 # digital-library
 A digital library(Proof of Concept/ Prototype) using RAG Architecture ! 
 
+-Workflow...
+--- U can insert the data(in milvus after setting it up) by running pipeline_milvus.py(`python pipeline.py`) file by correctly specifying the path where your pdf files are located.
+--- U can run the app using streamlit by running pipeline.py file `streamlit run pipeline.py`
+
 
 
 

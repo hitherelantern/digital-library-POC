@@ -54,6 +54,7 @@ def pipeline(pdf_path):
 
 # Execute the pipeline
 if __name__ == "__main__":
+    # specify the path where your data(pdf files) are located
     path = r'D:\project\Digital-Library\src\data'
     files = os.listdir(path)
     
